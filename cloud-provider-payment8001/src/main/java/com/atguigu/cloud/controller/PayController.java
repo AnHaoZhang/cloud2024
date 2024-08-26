@@ -13,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author cbz
  * @version 1.0
@@ -56,6 +58,11 @@ public class PayController
     public ResultData<Pay> getById(@PathVariable("id") Integer id)
     {
         if(id == -4) throw new RuntimeException("id不能为负数");
+        try{
+            TimeUnit.SECONDS.sleep(62);
+        }catch (Exception e){
+            System.out.println("erron"+e.getMessage());
+        }
 
         Pay pay = payService.getById(id);
         return ResultData.success(pay);
